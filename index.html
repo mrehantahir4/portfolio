@@ -1,0 +1,1310 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Rehan Tahir — Mobile App Developer working with Flutter, React Native, JavaScript and Firebase."
+  />
+  <title>Rehan Tahir | Mobile App Developer</title>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    /* ==========================================================================
+       CSS Variables & Base Reset
+       ========================================================================== */
+    :root {
+      --bg: #080808;
+      --panel: #111111;
+      --panel2: #171717;
+      --text: #ffffff;
+      --muted: #b9b9b9;
+      --line: #303030;
+      --accent: #ff7900;
+      --accent2: #ffffff;
+      --max: 1120px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 86px;
+    }
+
+    body {
+      background: radial-gradient(ellipse at 80% 0%, #3a1c08 0, transparent 35%), var(--bg);
+      color: var(--text);
+      font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .wrap {
+      width: min(var(--max), calc(100% - 40px));
+      margin: auto;
+    }
+
+    /* ==========================================================================
+       Navigation Bar
+       ========================================================================== */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(8, 8, 8, 0.92);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .navin {
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    .links {
+      display: flex;
+      gap: 28px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .links a {
+      transition: color 0.2s ease;
+    }
+
+    .links a:hover {
+      color: var(--accent);
+    }
+
+    .menu {
+      display: none;
+      background: none;
+      border: 1px solid var(--line);
+      color: var(--text);
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      cursor: pointer;
+    }
+
+    /* ==========================================================================
+       Hero Section
+       ========================================================================== */
+    .hero {
+      position: relative;
+      padding: 105px 0 90px;
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      align-items: center;
+      gap: 56px;
+      min-height: 590px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 10% auto auto -15%;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: rgba(255, 121, 0, 0.07);
+      filter: blur(70px);
+      pointer-events: none;
+    }
+
+    .hero-copy {
+      animation: heroText 0.8s ease both;
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.76rem;
+      font-weight: 800;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.8rem, 6.3vw, 5.2rem);
+      line-height: 1.04;
+      letter-spacing: -0.065em;
+      margin: 18px 0;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .lead {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 630px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 13px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 12px 20px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.92rem;
+      border: 1px solid var(--line);
+      transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease, background 0.2s ease;
+      cursor: pointer;
+    }
+
+    .btn.primary {
+      background: var(--accent);
+      color: #111111;
+      border-color: var(--accent);
+    }
+
+    .btn:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 28px rgba(255, 121, 0, 0.18);
+    }
+
+    .btn:not(.primary):hover,
+    .contact-links a:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* Portrait Image & Floating Badges */
+    .portrait-wrap {
+      position: relative;
+      min-height: 450px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      isolation: isolate;
+      animation: floatIn 0.9s ease both;
+    }
+
+    .portrait-glow {
+      position: absolute;
+      width: 82%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 121, 0, 0.22) 0%, rgba(255, 121, 0, 0.06) 48%, transparent 70%);
+      filter: blur(14px);
+      z-index: -1;
+      animation: pulseGlow 4s ease-in-out infinite;
+    }
+
+    .portrait-frame {
+      position: relative;
+      width: min(100%, 370px);
+      height: 440px;
+      border: 2px solid var(--accent);
+      border-radius: 46% 46% 18px 18px;
+      overflow: hidden;
+      background: #161616;
+      box-shadow: 0 0 0 8px rgba(255, 121, 0, 0.05), 0 20px 70px rgba(255, 121, 0, 0.12);
+      transform: translateY(0);
+      animation: portraitFloat 5s ease-in-out infinite;
+    }
+
+    .portrait-frame::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 65%, rgba(8, 8, 8, 0.75));
+      pointer-events: none;
+    }
+
+    .portrait-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 18%;
+      display: block;
+      transition: transform 0.7s ease;
+    }
+
+    .portrait-frame:hover img {
+      transform: scale(1.045);
+    }
+
+    .float-tag {
+      position: absolute;
+      z-index: 2;
+      background: rgba(18, 18, 18, 0.92);
+      border: 1px solid rgba(255, 121, 0, 0.45);
+      border-radius: 12px;
+      padding: 10px 14px;
+      color: #ffffff;
+      font-size: 0.86rem;
+      font-weight: 700;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      animation: tagFloat 4s ease-in-out infinite;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      letter-spacing: -0.01em;
+    }
+
+    .float-tag svg {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      display: inline-block;
+    }
+
+    .tag-flutter {
+      top: 15%;
+      left: -4%;
+    }
+
+    .tag-native {
+      top: 55%;
+      right: -4%;
+      animation-delay: 0.7s;
+    }
+
+    .tag-firebase {
+      bottom: 18%;
+      left: -2%;
+      animation-delay: 1.3s;
+    }
+
+    .portrait-caption {
+      position: absolute;
+      bottom: -6px;
+      right: 0;
+      background: #101010;
+      border: 1px solid #333333;
+      border-radius: 999px;
+      padding: 9px 15px;
+      font-size: 0.78rem;
+      color: #e8e8e8;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .live-dot {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      background: var(--accent);
+      border-radius: 50%;
+      margin-right: 8px;
+      box-shadow: 0 0 12px var(--accent);
+    }
+
+    /* ==========================================================================
+       General Sections & Headings
+       ========================================================================== */
+    .section {
+      padding: 78px 0;
+    }
+
+    .section-head {
+      max-width: 650px;
+      margin-bottom: 34px;
+    }
+
+    .kicker {
+      color: var(--accent);
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .section h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: -0.05em;
+      line-height: 1.12;
+      margin: 10px 0 14px;
+    }
+
+    .section-head p,
+    .muted {
+      color: var(--muted);
+    }
+
+    /* ==========================================================================
+       About Section
+       ========================================================================== */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 38px;
+      align-items: start;
+    }
+
+    .about-panel {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 20px;
+      padding: 26px;
+      transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+    }
+
+    .about-panel:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255, 121, 0, 0.45);
+      box-shadow: 0 16px 42px rgba(0, 0, 0, 0.4), 0 0 24px rgba(255, 121, 0, 0.05);
+    }
+
+    .about-panel p {
+      color: var(--muted);
+      margin-top: 0;
+    }
+
+    .bullet {
+      display: flex;
+      gap: 12px;
+      margin: 17px 0;
+    }
+
+    .check {
+      color: var(--accent);
+      font-weight: 900;
+      font-size: 1.05rem;
+    }
+
+    /* ==========================================================================
+       Skills Section
+       ========================================================================== */
+    .skills {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .skill {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      padding: 21px;
+      border-radius: 17px;
+      transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+    }
+
+    .skill:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255, 121, 0, 0.45);
+      box-shadow: 0 16px 42px rgba(0, 0, 0, 0.4), 0 0 24px rgba(255, 121, 0, 0.05);
+    }
+
+    .skill .icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: rgba(255, 121, 0, 0.12);
+      color: var(--accent);
+      font-weight: 800;
+      font-size: 0.95rem;
+      margin-bottom: 17px;
+    }
+
+    .skill .icon svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .skill h3 {
+      font-size: 1rem;
+      margin: 0 0 6px;
+    }
+
+    .skill p {
+      font-size: 0.87rem;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    /* ==========================================================================
+       Projects Section
+       ========================================================================== */
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .project {
+      background: linear-gradient(180deg, #15181b 0%, #0e1012 100%);
+      border: 1px solid #282a2e;
+      border-radius: 16px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s cubic-bezier(0.2, 0, 0, 1), 
+                  border-color 0.3s ease, 
+                  box-shadow 0.3s ease;
+    }
+
+    .project:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255, 121, 0, 0.55);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55), 0 0 24px rgba(255, 121, 0, 0.12);
+    }
+
+    .project-media {
+      position: relative;
+      width: 100%;
+      height: 195px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #080a0c;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .project-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.45s cubic-bezier(0.2, 0, 0, 1);
+    }
+
+    .project:hover .project-media img {
+      transform: scale(1.05);
+    }
+
+    .project-body {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .project h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.35;
+      margin: 0 0 10px;
+      letter-spacing: -0.01em;
+    }
+
+    .project p {
+      color: #9aa5b5;
+      font-size: 0.85rem;
+      line-height: 1.55;
+      margin: 0 0 16px;
+      flex-grow: 1;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: auto;
+    }
+
+    .chip {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 4px 8px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 6px;
+      color: #b8c0cc;
+      transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+    }
+
+    .project:hover .chip {
+      border-color: rgba(255, 121, 0, 0.25);
+      color: #f0f4f8;
+    }
+
+    .project-links {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: gap 0.2s ease, color 0.2s ease;
+    }
+
+    .project-link:hover {
+      color: #ffa142;
+      gap: 9px;
+    }
+
+    .note {
+      font-size: 0.82rem;
+      color: #83909e;
+      margin-top: 24px;
+      text-align: center;
+    }
+
+    .highlight {
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-weight: 600;
+    }
+
+    .accent-text {
+      color: var(--accent);
+    }
+
+    /* ==========================================================================
+       Process Section
+       ========================================================================== */
+    .process {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .step {
+      border-top: 1px solid var(--line);
+      padding: 20px 4px;
+      transition: transform 0.28s ease, border-color 0.28s ease;
+    }
+
+    .step b {
+      color: var(--accent);
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+    }
+
+    .step h3 {
+      margin: 10px 0 5px;
+    }
+
+    .step p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    /* ==========================================================================
+       Contact Section
+       ========================================================================== */
+    .contact {
+      padding: 35px;
+      border: 1px solid #59300f;
+      border-radius: 26px;
+      background: radial-gradient(ellipse at 100% 0%, rgba(255, 121, 0, 0.12), transparent 45%), var(--panel);
+      transition: transform 0.28s ease, border-color 0.28s ease;
+    }
+
+    .contact-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .contact h2 {
+      max-width: 620px;
+    }
+
+    .contact p {
+      color: var(--muted);
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .contact-links a {
+      border: 1px solid var(--line);
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      transition: border-color 0.2s ease, color 0.2s ease;
+    }
+
+    /* ==========================================================================
+       Footer
+       ========================================================================== */
+    footer {
+      padding: 28px 0;
+      color: #7e8998;
+      font-size: 0.84rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      margin-top: 70px;
+    }
+
+    .foot {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* ==========================================================================
+       Scroll Reveal & Animations
+       ========================================================================== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes heroText {
+      from {
+        opacity: 0;
+        transform: translateX(-22px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes floatIn {
+      from {
+        opacity: 0;
+        transform: translateY(22px) scale(0.98);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes portraitFloat {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-9px);
+      }
+    }
+
+    @keyframes tagFloat {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% {
+        opacity: 0.7;
+        transform: scale(0.96);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.04);
+      }
+    }
+
+    /* ==========================================================================
+       Responsive Media Queries
+       ========================================================================== */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    @media (max-width: 1040px) {
+      .projects {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 800px) {
+      .portrait-wrap {
+        min-height: 390px;
+      }
+      .portrait-frame {
+        height: 390px;
+        width: min(78%, 340px);
+      }
+      .tag-native {
+        right: 2%;
+      }
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 75px 0 55px;
+        gap: 30px;
+      }
+      .skills {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+      .contact-row {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+      .section {
+        padding: 58px 0;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .portrait-wrap {
+        min-height: 340px;
+      }
+      .portrait-frame {
+        height: 340px;
+        width: min(78%, 290px);
+      }
+      .float-tag {
+        font-size: 0.75rem;
+        padding: 8px 10px;
+      }
+      .float-tag svg {
+        width: 17px;
+        height: 17px;
+      }
+      .tag-flutter {
+        left: 0;
+      }
+      .tag-native {
+        right: 0;
+      }
+      .portrait-caption {
+        font-size: 0.68rem;
+        right: 0;
+      }
+      .wrap {
+        width: min(100% - 28px, var(--max));
+      }
+      .navin {
+        height: 66px;
+      }
+      .menu {
+        display: block;
+      }
+      .links {
+        display: none;
+        position: absolute;
+        top: 65px;
+        left: 0;
+        right: 0;
+        background: #0c1017;
+        padding: 18px 22px;
+        border-bottom: 1px solid var(--line);
+        flex-direction: column;
+        gap: 15px;
+      }
+      .links.open {
+        display: flex;
+      }
+      .hero {
+        padding-top: 58px;
+      }
+      .hero h1 {
+        font-size: 2.8rem;
+      }
+      .lead {
+        font-size: 1rem;
+      }
+      .projects,
+      .skills,
+      .process {
+        grid-template-columns: 1fr;
+      }
+      .project {
+        min-height: 230px;
+      }
+      .contact {
+        padding: 23px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header / Navigation -->
+  <header class="nav">
+    <div class="wrap navin">
+      <a class="logo" href="#home">REHAN<span>.</span></a>
+      <button class="menu" id="menu" aria-label="Toggle navigation">&#9776;</button>
+      <nav class="links" id="links">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#process">Approach</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="wrap hero" id="home">
+      <div class="hero-copy">
+        <div class="eyebrow">Mobile App Developer</div>
+        <h1>
+          Building useful apps.<br />
+          <em>Made for people.</em>
+        </h1>
+        <p class="lead">
+          I'm Rehan Tahir, a mobile app developer working with Flutter and React Native.
+          I enjoy turning ideas into responsive, user-friendly mobile experiences and connecting them with reliable backend services.
+        </p>
+        <div class="actions">
+          <a class="btn primary" href="#projects">Explore my work &rarr;</a>
+          <a class="btn" href="#contact">Let's connect</a>
+        </div>
+      </div>
+
+      <div class="portrait-wrap">
+        <div class="portrait-glow"></div>
+        <div class="portrait-frame">
+          <img src="rehan-photo.png" alt="Rehan Tahir, Mobile App Developer" />
+        </div>
+
+        <!-- Flutter Floating Badge with Original Brand SVG -->
+        <div class="float-tag tag-flutter">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true">
+            <path d="M14.314 0L2.3 12l3.7 3.7L21.684 0h-7.37z" fill="#02569B"/>
+            <path d="M14.314 24h7.37L10.37 12.686l-3.7 3.7L14.314 24z" fill="#0175C2"/>
+            <path d="M10.37 12.686L6.67 16.386l3.7 3.7 3.7-3.7-3.7-3.7z" fill="#02569B"/>
+            <path d="M14.07 16.386l-3.7 3.7 3.944 3.944 7.37-7.37-3.7-3.7-3.914 3.426z" fill="#29B6F6"/>
+          </svg>
+          Flutter
+        </div>
+
+        <!-- React Native Floating Badge with Original Brand SVG -->
+        <div class="float-tag tag-native">
+          <svg viewBox="-11.5 -10.23174 23 20.46348" width="20" height="20" aria-hidden="true">
+            <circle cx="0" cy="0" r="2.05" fill="#61DAFB"/>
+            <g stroke="#61DAFB" stroke-width="1.1" fill="none">
+              <ellipse rx="11" ry="4.2"/>
+              <ellipse rx="11" ry="4.2" transform="rotate(60)"/>
+              <ellipse rx="11" ry="4.2" transform="rotate(120)"/>
+            </g>
+          </svg>
+          React Native
+        </div>
+
+        <!-- Firebase Floating Badge with Original Brand SVG -->
+        <div class="float-tag tag-firebase">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true">
+            <path fill="#FFA000" d="M4.654 18.254L8.358 2.378a.86.86 0 0 1 1.62-.058l2.67 5.048-7.994 10.886z"/>
+            <path fill="#F57C00" d="M14.28 9.537l2.127-4.053a.86.86 0 0 1 1.543.03l3.396 12.74-7.066-8.717z"/>
+            <path fill="#FFCA28" d="M3.056 19.344l8.347 4.67a1.232 1.232 0 0 0 1.206 0l8.337-4.67-3.414-12.807-14.476 12.807z"/>
+            <path fill="#FFA000" d="M12.609 24.014a1.232 1.232 0 0 1-1.206 0L3.056 19.344l9.553-5.515 8.337 5.515-8.337 4.67z"/>
+          </svg>
+          Firebase
+        </div>
+
+        <div class="portrait-caption">
+          <span class="live-dot"></span> Building better mobile experiences
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section reveal" id="about">
+      <div class="wrap about-grid">
+        <div class="section-head">
+          <div class="kicker">A little about me</div>
+          <h2>Curious developer.<br />Practical mindset.</h2>
+          <p>
+            I focus on building mobile applications that are clear to use, maintainable, and designed around real user needs.
+          </p>
+        </div>
+        <div class="about-panel">
+          <p>
+            My development journey includes working with Flutter and React Native, learning JavaScript fundamentals, and exploring Firebase authentication, API integration, and mobile app navigation.
+          </p>
+          <div class="bullet">
+            <span class="check">&#10003;</span>
+            <span>Building responsive mobile interfaces for different screen sizes.</span>
+          </div>
+          <div class="bullet">
+            <span class="check">&#10003;</span>
+            <span>Connecting app screens with backend APIs and Firebase services.</span>
+          </div>
+          <div class="bullet">
+            <span class="check">&#10003;</span>
+            <span>Learning through hands-on projects, debugging, and iteration.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="section reveal" id="skills">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="kicker">Technical toolkit</div>
+          <h2>Tools I work with</h2>
+          <p>A practical set of mobile-development technologies I have worked with or am actively learning.</p>
+        </div>
+        <div class="skills">
+          <article class="skill">
+            <div class="icon">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none">
+                <path d="M14.314 0L2.3 12l3.7 3.7L21.684 0h-7.37z" fill="#02569B"/>
+                <path d="M14.314 24h7.37L10.37 12.686l-3.7 3.7L14.314 24z" fill="#0175C2"/>
+                <path d="M10.37 12.686L6.67 16.386l3.7 3.7 3.7-3.7-3.7-3.7z" fill="#02569B"/>
+                <path d="M14.07 16.386l-3.7 3.7 3.944 3.944 7.37-7.37-3.7-3.7-3.914 3.426z" fill="#29B6F6"/>
+              </svg>
+            </div>
+            <h3>Flutter</h3>
+            <p>Cross-platform UI development and responsive layouts.</p>
+          </article>
+          <article class="skill">
+            <div class="icon">
+              <svg viewBox="-11.5 -10.23174 23 20.46348" width="22" height="22">
+                <circle cx="0" cy="0" r="2.05" fill="#61DAFB"/>
+                <g stroke="#61DAFB" stroke-width="1.2" fill="none">
+                  <ellipse rx="11" ry="4.2"/>
+                  <ellipse rx="11" ry="4.2" transform="rotate(60)"/>
+                  <ellipse rx="11" ry="4.2" transform="rotate(120)"/>
+                </g>
+              </svg>
+            </div>
+            <h3>React Native</h3>
+            <p>Building Android app screens with React Native CLI.</p>
+          </article>
+          <article class="skill">
+            <div class="icon">
+              <!-- Official JavaScript Logo -->
+              <svg viewBox="0 0 24 24" width="22" height="22">
+                <rect width="24" height="24" rx="4" fill="#F7DF1E"/>
+                <path d="M6.55 17.65c.34.56.8 1 1.45 1.3.64.3 1.34.46 2.1.46.77 0 1.45-.16 2.05-.48.6-.32 1.05-.8 1.37-1.42.32-.62.47-1.37.47-2.24V8h-2.5v7.24c0 .65-.13 1.13-.4 1.45-.26.31-.66.47-1.2.47-.44 0-.8-.11-1.07-.32-.27-.22-.48-.56-.63-1.03l-1.64.93zM19.9 14.54c-.16-.62-.48-1.12-.96-1.52-.48-.39-1.12-.68-1.92-.86l-.97-.22c-.44-.1-.8-.23-1.08-.4-.28-.17-.43-.43-.43-.76 0-.34.14-.61.42-.81.28-.2.67-.3 1.16-.3.47 0 .86.1 1.16.31.3.2.5.5.6.89l2.25-.49c-.2-.74-.59-1.34-1.17-1.78-.58-.45-1.4-.67-2.45-.67-1.04 0-1.88.27-2.52.8-.64.53-.96 1.25-.96 2.14 0 .7.2 1.26.6 1.7.4.43.98.74 1.74.92l1.08.26c.55.13.97.3 1.27.51.3.21.45.52.45.92 0 .43-.18.76-.53 1-.35.24-.87.36-1.54.36-.64 0-1.16-.14-1.55-.43-.39-.29-.65-.72-.77-1.3l-2.32.4c.2 1.02.69 1.8 1.47 2.34.78.54 1.84.81 3.17.81 1.28 0 2.29-.31 3.03-.92.74-.61 1.11-1.46 1.11-2.54 0-.32-.05-.67-.16-1.05z" fill="#000000"/>
+              </svg>
+            </div>
+            <h3>JavaScript</h3>
+            <p>Core concepts, functions, strings, arrays, and application logic.</p>
+          </article>
+          <article class="skill">
+            <div class="icon">
+              <!-- Official Firebase Logo -->
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none">
+                <path fill="#FFA000" d="M4.654 18.254L8.358 2.378a.86.86 0 0 1 1.62-.058l2.67 5.048-7.994 10.886z"/>
+                <path fill="#F57C00" d="M14.28 9.537l2.127-4.053a.86.86 0 0 1 1.543.03l3.396 12.74-7.066-8.717z"/>
+                <path fill="#FFCA28" d="M3.056 19.344l8.347 4.67a1.232 1.232 0 0 0 1.206 0l8.337-4.67-3.414-12.807-14.476 12.807z"/>
+                <path fill="#FFA000" d="M12.609 24.014a1.232 1.232 0 0 1-1.206 0L3.056 19.344l9.553-5.515 8.337 5.515-8.337 4.67z"/>
+              </svg>
+            </div>
+            <h3>Firebase</h3>
+            <p>Authentication workflows and app-backend integration.</p>
+          </article>
+          <article class="skill">
+            <div class="icon">
+              <!-- REST APIs / Endpoints Architecture -->
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="8" rx="2.5"/>
+                <rect x="2" y="14" width="20" height="8" rx="2.5"/>
+                <line x1="6" y1="6" x2="6.01" y2="6" stroke-width="2.5"/>
+                <line x1="6" y1="18" x2="6.01" y2="18" stroke-width="2.5"/>
+                <path d="M17 6h1a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-4a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h1"/>
+              </svg>
+            </div>
+            <h3>REST APIs</h3>
+            <p>Working with endpoints, base URLs, and request/response debugging.</p>
+          </article>
+          <article class="skill">
+            <div class="icon">
+              <!-- Official GitHub Logo -->
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+              </svg>
+            </div>
+            <h3>Git & GitHub</h3>
+            <p>Project repositories and source-code collaboration workflows.</p>
+          </article>
+          <article class="skill">
+            <div class="icon">
+              <!-- Official Figma / UI Design Logo -->
+              <svg viewBox="0 0 24 24" width="22" height="22">
+                <path fill="#F24E1E" d="M6 12a3 3 0 0 1 3-3h3v6H9a3 3 0 0 1-3-3z"/>
+                <path fill="#FF7262" d="M12 3H9a3 3 0 0 0 0 6h3V3z"/>
+                <path fill="#A259FF" d="M12 9H9a3 3 0 0 0-3 3 3 3 0 0 0 3 3h3V9z"/>
+                <path fill="#1ABCFE" d="M12 15H9a3 3 0 1 0 3 3v-3z"/>
+                <path fill="#0ACF83" d="M12 9h3a3 3 0 1 0 0-6h-3v6z"/>
+                <circle fill="#0ACF83" cx="15" cy="12" r="3"/>
+              </svg>
+            </div>
+            <h3>UI Implementation</h3>
+            <p>Navigation, screen structure, and user-focused interfaces.</p>
+          </article>
+          <article class="skill">
+            <div class="icon">
+              <!-- Official Android Robot Logo -->
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="#3DDC84">
+                <path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.551 0 .9993.4482.9993.9993.0001.5511-.4482.9997-.9993.9997m-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993 0 .5511-.4482.9997-.9993.9997m11.4045-6.02l1.997-3.4584a.416.416 0 0 0-.1521-.5676.416.416 0 0 0-.5676.1521l-2.0223 3.503C15.5902 8.411 13.8533 8.1 12 8.1s-3.5902.311-5.1365.8505L4.8412 5.4475a.4161.4161 0 0 0-.5677-.1521.4157.4157 0 0 0-.1521.5676l1.997 3.4584C2.6889 11.1867.3432 14.6589 0 18.761h24c-.3432-4.1021-2.6889-7.5743-6.1185-9.4396"/>
+              </svg>
+            </div>
+            <h3>Android Development</h3>
+            <p>Local Android development setup, builds, and emulator testing.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section reveal" id="projects">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="kicker">Selected work</div>
+          <h2>Featured <span class="accent-text">Projects</span></h2>
+          <p>Some of the app ideas and codebases that reflect my interests and hands-on development work.</p>
+        </div>
+        <div class="projects">
+          <!-- Project 1: Style Sphere -->
+          <article class="project">
+            <div class="project-media">
+              <img src="project-style-sphere.png" alt="Style Sphere — Fashion & Lifestyle App Mockup" loading="lazy" />
+            </div>
+            <div class="project-body">
+              <h3>Style Sphere &mdash; Fashion &amp; Lifestyle App</h3>
+              <p>
+                A modern fashion and lifestyle mobile application featuring an elegant UI, curated catalog browsing, wishlist management, cart operations, and smooth user experience backed by Firebase.
+              </p>
+              <div class="chips">
+                <span class="chip">Flutter</span>
+                <span class="chip">Firebase</span>
+                <span class="chip">REST API</span>
+              </div>
+              <div class="project-links">
+                <span class="project-link" style="opacity: 0.85; cursor: default;">Fashion &bull; Lifestyle</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 2: Tawasul Global Exports -->
+          <article class="project">
+            <div class="project-media">
+              <img src="project-tawasul.png" alt="Tawasul Global Exports App Mockup" loading="lazy" />
+            </div>
+            <div class="project-body">
+              <h3>Tawasul Global Exports</h3>
+              <p>
+                A digital B2B marketplace platform built to simplify international bulk exports, connect verified cross-border traders, and manage wholesale orders, tracking, and trade inquiries securely.
+              </p>
+              <div class="chips">
+                <span class="chip">Flutter</span>
+                <span class="chip">Firebase</span>
+                <span class="chip">Maps / Location</span>
+              </div>
+              <div class="project-links">
+                <span class="project-link" style="opacity: 0.85; cursor: default;">B2B Wholesale &bull; Trade</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 3: Skill Connect -->
+          <article class="project">
+            <div class="project-media">
+              <img src="project-skill-connect.png" alt="Skill Connect — Local Services Platform Mockup" loading="lazy" />
+            </div>
+            <div class="project-body">
+              <h3>Skill Connect &mdash; Local Services Platform</h3>
+              <p>
+                Find and book verified local service experts like carpenters, plumbers, and electricians with intuitive category browsing, direct booking flows, and AI-assisted professional recommendations.
+              </p>
+              <div class="chips">
+                <span class="chip">Flutter</span>
+                <span class="chip">Firebase</span>
+                <span class="chip">AI Recommendations</span>
+              </div>
+              <div class="project-links">
+                <span class="project-link" style="opacity: 0.85; cursor: default;">On-Demand &bull; AI Powered</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 4: Cargopas -->
+          <article class="project">
+            <div class="project-media">
+              <img src="project-cargopas.png" alt="Cargopas and Cargopas Driver Logistic App Mockup" loading="lazy" />
+            </div>
+            <div class="project-body">
+              <h3>Cargopas and Cargopas Driver (Logistic App)</h3>
+              <p>
+                A smart dual-application logistics solution offering instant freight load booking, turn-by-turn route optimization, payment protection, and real-time fleet tracking for drivers on the road.
+              </p>
+              <div class="chips">
+                <span class="chip">Flutter</span>
+                <span class="chip">Firebase</span>
+                <span class="chip">Google Map API</span>
+              </div>
+              <div class="project-links">
+                <span class="project-link" style="opacity: 0.85; cursor: default;">Logistics &bull; Live Fleet</span>
+              </div>
+            </div>
+          </article>
+        </div>
+        <p class="note">
+          Screenshots, demo links, and verified feature details to be added before publishing.
+        </p>
+      </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="section reveal" id="process">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="kicker">How I work</div>
+          <h2>Simple, thoughtful, iterative.</h2>
+          <p>I aim to keep the development process understandable and focused on solving the right problem.</p>
+        </div>
+        <div class="process">
+          <div class="step">
+            <b>01 / UNDERSTAND</b>
+            <h3>Start with the user</h3>
+            <p>Clarify the goal, key screens, and the experience the app needs to deliver.</p>
+          </div>
+          <div class="step">
+            <b>02 / BUILD</b>
+            <h3>Develop in steps</h3>
+            <p>Structure the interface, connect services, and test features as they come together.</p>
+          </div>
+          <div class="step">
+            <b>03 / IMPROVE</b>
+            <h3>Test and refine</h3>
+            <p>Debug issues, check responsiveness, and keep improving usability and reliability.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section reveal" id="contact">
+      <div class="wrap">
+        <div class="contact">
+          <div class="contact-row">
+            <div>
+              <div class="kicker">Have an opportunity?</div>
+              <h2>Let's build something useful.</h2>
+              <p>I'm interested in mobile app development opportunities, internships, and projects where I can contribute and keep growing.</p>
+            </div>
+            
+          </div>
+          <div class="contact-links" style="margin-top: 24px;">
+            <a href="https://github.com/mrehantahir4" target="_blank" rel="noreferrer">GitHub &rarr;</a>
+            <a href="https://www.linkedin.com/in/muhammad-rehan-tahir-44832940b" target="_blank" rel="noreferrer">LinkedIn &rarr;</a>
+            <a href="https://www.upwork.com/freelancers/~018819a37e4c16ca6f?mp_source=share" target="_blank" rel="noreferrer">Upwork &rarr;</a>
+            <a href="mailto:mrehantahir4@gmail.com">mrehantahir4@gmail.com</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="wrap foot">
+      <span>&copy; <span id="year"></span> Rehan Tahir</span>
+      <span>Designed with care • Built for the web</span>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Mobile navigation toggle
+    const menu = document.getElementById('menu');
+    const links = document.getElementById('links');
+
+    menu.addEventListener('click', () => {
+      links.classList.toggle('open');
+    });
+
+    // Close mobile nav when clicking a link
+    links.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        links.classList.remove('open');
+      });
+    });
+
+    // Dynamic current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Scroll reveal animation
+    const revealItems = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      revealItems.forEach(item => observer.observe(item));
+    } else {
+      revealItems.forEach(item => item.classList.add('visible'));
+    }
+  </script>
+</body>
+</html>
